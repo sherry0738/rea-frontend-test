@@ -18,16 +18,30 @@ export default class App extends React.Component {
       .then(res => res.json())
       .then(res => {
        this.setState({ results: res.results })
-        console.log(this.state.results);
         this.setState({ saved: res.saved })
-        console.log(this.state.saved)
       })
   }
 
   render() {
-    return <div>
-      <Resultscard />
+    const results = this.state.results;
+    if(results){
+      return <div>
+       {
+         results.map((property, index) => {
+           return (
+          <Resultscard  
+          key={index} 
+          result={property}
+          className="results"
+          />
+        )
+      })
+       }
     </div>
+    }else {
+      return <div>loading...</div>
+    }
+    
   }
 
 }
