@@ -1,8 +1,15 @@
-# webpack react hot reload starter
+# REA Properties viewer
+[Design Document](https://)
+Description here.
 
-All you need, none you don't. 
+## Demo
+[Demo name](https://)
 
-Sensible starter with hot reload to try react with webpack 3 that deploys straight to github pages.
+## Technologies used
+NodeJS
+React
+Ant Design
+Online Mocking Services
 
 ## Based on
 
