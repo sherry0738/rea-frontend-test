@@ -1,5 +1,6 @@
 import React, { Component }  from 'react'
 import Resultscard from './Resultscard'
+import Savedcard from './Savedcard'
 
 export default class App extends React.Component {
 
@@ -8,7 +9,7 @@ export default class App extends React.Component {
     this.state = {
       resultsList: [],
       savedList: []
-  }
+    }
   }
 
   componentDidMount() {
@@ -24,24 +25,34 @@ export default class App extends React.Component {
 
   render() {
     const results = this.state.results;
-    if(results){
-      return <div>
-       {
-         results.map((property, index) => {
-           return (
-          <Resultscard  
-          key={index} 
-          result={property}
-          className="results"
-          />
-        )
-      })
-       }
+    const saved = this.state.saved;
+    if(results && saved) {
+      return <div className="card_container">
+        <div>
+        {results.map((property, index) => {
+            return (
+            <Resultscard  
+            key={index} 
+            result={property}
+            className="results"
+            />
+            )
+        })}
+      </div>
+      <div>
+      {saved.map((property, index) => {
+          return (
+         <Savedcard  
+         key={index} 
+         saved={property}
+         className="saved"
+         />
+          )
+      })}
+      </div>
     </div>
     }else {
       return <div>loading...</div>
     }
-    
   }
-
 }
