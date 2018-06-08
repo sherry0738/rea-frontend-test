@@ -48,12 +48,10 @@ export default class App extends React.Component {
   };
 
   deleteProperty(savedProp) {
-    console.log(savedProp);
-    let savedPropIndexAtSaved = this.state.saved.indexOf(savedProp);
-    console.log(savedPropIndexAtSaved)
+    const saved = this.state.saved;
+    let savedPropIndexAtSaved = saved.indexOf(savedProp);
     if(savedPropIndexAtSaved > -1) {
-      this.state.saved.splice(savedPropIndexAtSaved, 1);
-      console.log(this.state.saved);
+      saved.splice(savedPropIndexAtSaved, 1);
       this.setState({
         alertType: "success", 
         alertMessage: 'The Property deleted.'
