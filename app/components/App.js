@@ -9,6 +9,7 @@ export default class App extends React.Component {
   constructor(props) {
     super(props)
     this.addProperty = this.addProperty.bind(this)
+    this.deleteProperty = this.deleteProperty.bind(this)
     this.state = {
       results: [],
       saved: [],
@@ -31,7 +32,7 @@ export default class App extends React.Component {
   addProperty(resultProp) {
     const saved = this.state.saved;
     let resultPropIndexAtSaved = saved.findIndex(savedProp => savedProp.id === resultProp.id)
-    if (resultPropIndexAtSaved != -1) { 
+    if (resultPropIndexAtSaved > -1) { 
       this.setState({ 
         alertType: "error", 
         alertMessage: 'Property Already Saved' 
@@ -45,6 +46,25 @@ export default class App extends React.Component {
       })
     }
   };
+
+  deleteProperty(savedProp) {
+    console.log(savedProp);
+    let savedPropIndexAtSaved = this.state.saved.indexOf(savedProp);
+    console.log(savedPropIndexAtSaved)
+    if(savedPropIndexAtSaved > -1) {
+      this.state.saved.splice(savedPropIndexAtSaved, 1);
+      console.log(this.state.saved);
+      this.setState({
+        alertType: "success", 
+        alertMessage: 'The Property deleted.'
+      })
+    } else {
+      this.setState({
+        alertType: "error", 
+        alertMessage: 'his property!'
+      })
+    }
+  }
 
   render() {
     const results = this.state.results;
@@ -76,6 +96,7 @@ export default class App extends React.Component {
          key={index} 
          saved={property}
          className="saved"
+         deleteBtnOnClick={this.deleteProperty}
          />
           )
       })}
