@@ -2,6 +2,7 @@ import React, { Component }  from 'react'
 import Resultscard from './Resultscard'
 import Savedcard from './Savedcard'
 import { Alert } from 'antd';
+import { Button, notification, Icon } from 'antd';
 
 export default class App extends React.Component {
 
@@ -28,15 +29,20 @@ export default class App extends React.Component {
   }
 
   addProperty(resultProp) {
-    console.log(resultProp);
-    if (resultProp) { 
+    const saved = this.state.saved;
+    let resultPropIndexAtSaved = saved.findIndex(savedProp => savedProp.id === resultProp.id)
+    if (resultPropIndexAtSaved != -1) { 
       this.setState({ 
         alertType: "error", 
-        alertMessage: 'Property Already Saved' })
+        alertMessage: 'Property Already Saved' 
+      })
     } else {
+      saved.push(resultProp)
+      console.log(saved);
       this.setState({
         alertType: "success", 
-        alertMessage: 'This Property Added into Saved List successfully'})
+        alertMessage: 'This Property Added into Saved List successfully'
+      })
     }
   };
 
@@ -56,11 +62,12 @@ export default class App extends React.Component {
             />
             )
         })}
-        <Alert 
+         <Alert 
         showIcon
         message={this.state.alertMessage}
         type={this.state.alertType}  
-      />
+      /> 
+       
       </div>
       <div>
       {saved.map((property, index) => {
