@@ -1,14 +1,18 @@
 import React, { Component }  from 'react'
 import Resultscard from './Resultscard'
 import Savedcard from './Savedcard'
+import { Alert } from 'antd';
 
 export default class App extends React.Component {
 
   constructor(props) {
     super(props)
+    this.addProperty = this.addProperty.bind(this)
     this.state = {
-      resultsList: [],
-      savedList: []
+      results: [],
+      saved: [],
+      alertType: "",
+      alertMessage: ""
     }
   }
 
@@ -23,6 +27,19 @@ export default class App extends React.Component {
       })
   }
 
+  addProperty(resultProp) {
+    console.log(resultProp);
+    if (resultProp) { 
+      this.setState({ 
+        alertType: "error", 
+        alertMessage: 'Property Already Saved' })
+    } else {
+      this.setState({
+        alertType: "success", 
+        alertMessage: 'This Property Added into Saved List successfully'})
+    }
+  };
+
   render() {
     const results = this.state.results;
     const saved = this.state.saved;
@@ -35,9 +52,15 @@ export default class App extends React.Component {
             key={index} 
             result={property}
             className="results"
+            addBtnOnClick={this.addProperty}
             />
             )
         })}
+        <Alert 
+        showIcon
+        message={this.state.alertMessage}
+        type={this.state.alertType}  
+      />
       </div>
       <div>
       {saved.map((property, index) => {

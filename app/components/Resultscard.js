@@ -1,6 +1,8 @@
 import React from 'react'
 import { Card } from 'antd';
 const { Meta } = Card;
+import { Button } from 'antd';
+import './Resultscard.scss'
 
 export default class Resultscard extends React.Component {
 
@@ -18,11 +20,13 @@ export default class Resultscard extends React.Component {
       type="inner"          
       title={<img alt="agency_logo" src={result.agency.logo} />}
       cover={<img alt="main_image" src={result.mainImage} />}  
-      >        
-      <Meta
-      title={result.price}
-      description="description"
-      />        
+      > 
+      <p><span className="price">{result.price}</span><span className="search_icon">{<a href="#">&#128269;</a>}</span></p>  
+      <button
+        className=""
+        type="edit"
+        onClick={() => this.props.addBtnOnClick(result)}
+        >Add +</button>   
       </Card>
     </Card>
     </div> 
