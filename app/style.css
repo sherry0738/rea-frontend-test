@@ -8,4 +8,14 @@
     justify-content: space-around;
     background-color: lightgray;
   }
-  
+
+  .title_container {
+    font-size: 25px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 20px auto;
+  }
+  /* .ant-alert .alert_msg {
+    background-color: white;
+  } */

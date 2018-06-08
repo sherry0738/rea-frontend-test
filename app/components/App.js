@@ -1,8 +1,10 @@
 import React, { Component }  from 'react'
+import { Card } from 'antd';
 import Resultscard from './Resultscard'
 import Savedcard from './Savedcard'
 import { Alert } from 'antd';
 import { Button, notification, Icon } from 'antd';
+import { message } from 'antd';
 
 export default class App extends React.Component {
 
@@ -50,16 +52,16 @@ export default class App extends React.Component {
   deleteProperty(savedProp) {
     const saved = this.state.saved;
     let savedPropIndexAtSaved = saved.indexOf(savedProp);
-    if(savedPropIndexAtSaved > -1) {
+    if(savedPropIndexAtSaved > -1) {  
       saved.splice(savedPropIndexAtSaved, 1);
       this.setState({
-        alertType: "success", 
+        alertType: "warning", 
         alertMessage: 'The Property deleted.'
       })
     } else {
       this.setState({
         alertType: "error", 
-        alertMessage: 'his property!'
+        alertMessage: 'Could not find the property!'
       })
     }
   }
@@ -68,37 +70,48 @@ export default class App extends React.Component {
     const results = this.state.results;
     const saved = this.state.saved;
     if(results && saved) {
-      return <div className="card_container">
+      return <div className="app_container">
+        <div className="title_container">
+          <div><b>Results</b></div>
+          <div><b>Saved</b></div>
+        </div>
+        <div>
+          <Alert 
+          className="alert_msg"
+          message={this.state.alertMessage}
+          type={this.state.alertType}  
+          /> 
+      </div>
+      <div className="card_container"> 
         <div>
         {results.map((property, index) => {
-            return (
+            return (<div>
             <Resultscard  
             key={index} 
             result={property}
             className="results"
-            addBtnOnClick={this.addProperty}
+            btnOnClick={this.addProperty}
             />
-            )
-        })}
-         <Alert 
-        showIcon
-        message={this.state.alertMessage}
-        type={this.state.alertType}  
-      /> 
-       
+          <br/> 
+          </div> 
+          )
+        })} 
       </div>
       <div>
       {saved.map((property, index) => {
-          return (
+          return (<div>
          <Savedcard  
          key={index} 
          saved={property}
          className="saved"
-         deleteBtnOnClick={this.deleteProperty}
+         btnOnClick={this.deleteProperty}
          />
-          )
+         <br/>
+         </div>
+        )
       })}
       </div>
+    </div>
     </div>
     }else {
       return <div>loading...</div>

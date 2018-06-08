@@ -12,24 +12,27 @@ export default class Resultscard extends React.Component {
     
       render() {
         const saved = this.props.saved;
+        const logoStyle = {
+            backgroundColor: saved.agency.brandingColors.primary,
+            width: "500px" 
+        }
         return <div>
-        <Card title="Saved">
         <Card
           hoverable
-          style={{ width: 500 }}
-          type="inner"
+          style={logoStyle}
+          className="saved_card"
           title={<img alt="agency_logo" src={saved.agency.logo} />}
-          extra={<a href="#">&#128269;</a>}
           cover={<img alt="main_image" src={saved.mainImage} />}
         >
-        <p><span className="price">{saved.price}</span><span className="search_icon">{<a href="#">&#128269;</a>}</span></p>
-        <button
-        className=""
-        type="edit"
-        onClick={() => this.props.deleteBtnOnClick(saved)}
-        >Delete</button>
+        <div>
+            <p><span className="price">{saved.price}</span></p>
+            <button
+            className=""
+            type="edit"
+            onClick={() => this.props.btnOnClick(saved)}>Delete
+            </button>
+        </div>
         </Card>
-      </Card>
         </div>
       }
     }

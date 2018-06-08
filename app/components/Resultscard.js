@@ -9,26 +9,30 @@ export default class Resultscard extends React.Component {
   constructor(props) {
     super(props)
   }
-
+  
   render() {
     const result = this.props.result;
+    const logoStyle = {
+      backgroundColor: result.agency.brandingColors.primary,
+      width: "500px" 
+    }
     return <div>
-    <Card title="Results">
       <Card
       hoverable
-      style={{ width: 500 }}
-      type="inner"          
+      style={logoStyle}
+      className="result_card"         
       title={<img alt="agency_logo" src={result.agency.logo} />}
-      cover={<img alt="main_image" src={result.mainImage} />}  
+      cover={<img alt="main_image" src={result.mainImage} />} 
       > 
-      <p><span className="price">{result.price}</span><span className="search_icon">{<a href="#">&#128269;</a>}</span></p>  
-      <button
+      <div>
+        <p><span className="price">{result.price}</span></p>  
+        <button
         className=""
         type="edit"
-        onClick={() => this.props.addBtnOnClick(result)}
-        >Add +</button>   
+        onClick={() => this.props.btnOnClick(result)}>Add
+        </button> 
+      </div>
       </Card>
-    </Card>
     </div> 
   }
 }
