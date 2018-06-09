@@ -1,7 +1,27 @@
 .saved_card .ant-card-body {
-    background-color: white;
-    padding:0;
-} 
+  background-color: white;
+  padding: 0;
+}
 .saved_card .ant-card-head {
-    background-color: transparent;
+  background-color: transparent;
+}
+.deleteBtn:hover {
+  background-color: rgba(202, 50, 23, 0.8);
+  transition: 0.2s linear;
+  cursor: pointer;
+}
+.deleteBtn {
+  width: 100px;
+}
+.saved_title .ant-card-head-title {
+  margin: 0;
+  text-align: center;
+  font-size: 25px;
+}
+.saved_card .ant-card-head-title {
+  margin: 0;
+  text-align: left;
+}
+.saved_container {
+  width: 40%;
 }

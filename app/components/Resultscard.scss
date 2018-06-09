@@ -1,44 +1,27 @@
 .result_card .ant-card-body {
-    background-color: white;
-    padding:0;
-} 
+  background-color: white;
+  padding: 0;
+}
 .result_card .ant-card-head {
-    background-color: transparent;
+  background-color: transparent;
 }
-.cards_container {
-    position: relative;
-    margin: 30px auto;
-    width: 480px;
-}
-.btn_container {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    top: 0;
-    left: 0;
-    transition: .3s linear;
-}
-.btn_box {
-    font-size: 25px;
-    position: absolute;
-    bottom: 0;
-    opacity: 0;
-    transition: .2s linear;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
-.cards_container:hover .btn_container {
-    background-color: rgba(22, 21, 21, 0.7);
-    transition: .2s linear; 
-  }
-.cards_container:hover .btn_box {
-    bottom: 18%;
-    opacity: 1;
-    transition: .2s linear;
-  }
 .addBtn:hover {
-    background-color: rgba(211, 243, 174, 0.8);
-    transition: .2s linear;
-    cursor: pointer;
-  }
+  background-color: rgba(211, 243, 174, 0.8);
+  transition: 0.2s linear;
+  cursor: pointer;
+}
+.addBtn {
+  width: 100px;
+}
+.results_title .ant-card-head-title {
+  margin: 0;
+  text-align: center;
+  font-size: 25px;
+}
+.result_card .ant-card-head-title {
+  margin: 0;
+  text-align: left;
+}
+.result_container {
+  width: 40%;
+}
