@@ -3,13 +3,20 @@ import { Card } from 'antd';
 import Resultscard from './Resultscard';
 import Savedcard from './Savedcard';
 import { message } from 'antd';
+
+import {
+  checkIfPropertyIsSaved,
+  savePropertyToSaved,
+  removePropertyFromSaved,
+} from '../../lib/PropertyFunctions';
+
 const Config = require('Config');
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    this.addProperty = this.addProperty.bind(this);
-    this.deleteProperty = this.deleteProperty.bind(this);
+    this.handlePropertyAdd = this.handlePropertyAdd.bind(this);
+    this.handlePropertyRemove = this.handlePropertyRemove.bind(this);
     this.state = {
       results: [],
       saved: [],
@@ -28,33 +35,30 @@ export default class App extends React.Component {
       });
   }
 
-  addProperty(resultProp) {
+  handlePropertyAdd(property) {
     const saved = this.state.saved;
-    let resultPropIndexAtSaved = saved.findIndex(
-      savedProp => savedProp.id === resultProp.id
-    );
-    if (resultPropIndexAtSaved > -1) {
+    if (checkIfPropertyIsSaved(property, saved)) {
       message.error('Property Already Saved', 4);
     } else {
-      saved.push(resultProp);
       this.setState({
-        saved: saved,
+        saved: savePropertyToSaved(property, saved),
       });
       message.success('Added into Saved List', 4);
     }
   }
 
-  deleteProperty(savedProp) {
+  handlePropertyRemove(property) {
     const saved = this.state.saved;
-    let savedPropIndexAtSaved = saved.indexOf(savedProp);
-    if (savedPropIndexAtSaved > -1) {
-      saved.splice(savedPropIndexAtSaved, 1);
+    if (checkIfPropertyIsSaved(property, saved)) {
       this.setState({
-        saved: saved,
+        saved: removePropertyFromSaved(property, saved),
       });
       message.success('The Property deleted', 4);
+      if (saved.length == 0) {
+        message.warning('No saved property!');
+      }
     } else {
-      message.error('Could not find the property', 4);
+      message.error('Could not find the property!', 4);
     }
   }
 
@@ -78,7 +82,7 @@ export default class App extends React.Component {
                         key={index}
                         result={property}
                         className="results"
-                        btnOnClick={this.addProperty}
+                        handlePropertyAdd={this.handlePropertyAdd}
                       />
                       <br />
                     </div>
@@ -100,7 +104,7 @@ export default class App extends React.Component {
                         key={index}
                         saved={property}
                         className="saved"
-                        btnOnClick={this.deleteProperty}
+                        handlePropertyRemove={this.handlePropertyRemove}
                       />
                       <br />
                     </div>

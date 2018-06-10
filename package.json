@@ -7,7 +7,7 @@
     "start": "webpack-dev-server --hot --env.dev --config config/webpack.config.js",
     "prod": "webpack-dev-server --hot --env.prod --config config/webpack.config.js",
     "build": "webpack --env.prod -p --config config/webpack.config.js",
-    "test": "NODE_ENV=test mocha --require babel-core/register"
+    "test": "jest"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

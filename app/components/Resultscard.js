@@ -34,7 +34,7 @@ export default class Resultscard extends React.Component {
               <button
                 className="addBtn"
                 type="edit"
-                onClick={() => this.props.btnOnClick(result)}
+                onClick={() => this.props.handlePropertyAdd(result)}
               >
                 Add
               </button>
