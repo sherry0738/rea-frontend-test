@@ -1,0 +1,55 @@
+.ad-card .ant-card-body {
+  background-color: white;
+  padding: 0;
+}
+.ad-card .ant-card-head {
+  background-color: transparent;
+}
+
+.action-btn {
+  width: 100px;
+}
+.ad-title .ant-card-head-title {
+  margin: 0;
+  text-align: center;
+  font-size: 25px;
+}
+.ad-card .ant-card-head-title {
+  margin: 0;
+  text-align: left;
+}
+.ad-container {
+  width: 40%;
+}
+.card-container {
+  position: relative;
+  margin: 30px auto;
+}
+.card-container:hover .btn-container {
+  background-color: rgba(39, 37, 37, 0.7);
+  transition: 0.2s linear;
+}
+.card-container:hover .btn-box {
+  bottom: 18%;
+  opacity: 1;
+  transition: 0.2s linear;
+}
+.card-container .ant-card-head {
+  background-color: transparent;
+}
+.card-container .ant-card-head-title {
+  margin: 0;
+  text-align: center;
+  font-size: 25px;
+}
+.card-container .ant-card-head-title {
+  margin: 0;
+  text-align: left;
+}
+.card-container .ant-card-body {
+  background-color: white;
+  padding: 0;
+}
+.card-container .ant-card-head {
+  background-color: transparent;
+}

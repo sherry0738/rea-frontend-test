@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { Card } from 'antd';
-import Resultscard from './Resultscard';
-import Savedcard from './Savedcard';
-import { message } from 'antd';
+import { Card, message, Alert } from 'antd';
+import AdCard from './AdCard';
 
 import {
   checkIfPropertyIsSaved,
@@ -21,18 +19,32 @@ export default class App extends React.Component {
       results: [],
       saved: [],
       loading: true,
+      error: null,
     };
   }
 
   componentDidMount() {
     let uri = Config.serverUrl;
-    fetch(uri)
-      .then(res => res.json())
-      .then(res => {
-        this.setState({ results: res.results });
-        this.setState({ saved: res.saved });
-        this.setState({ loading: false });
-      });
+    try {
+      fetch(uri)
+        .then(res => {
+          if (!res.ok) {
+            throw new Error('Failed to get property data.');
+          }
+          return res.json();
+        })
+        .then(res => {
+          this.setState({ results: res.results });
+          this.setState({ saved: res.saved });
+          this.setState({ loading: false });
+          this.setState({ error: null });
+        })
+        .catch(error => {
+          this.setState({ error, loading: false });
+        });
+    } catch (error) {
+      this.setState({ error, loading: false });
+    }
   }
 
   handlePropertyAdd(property) {
@@ -65,11 +77,22 @@ export default class App extends React.Component {
   render() {
     const results = this.state.results;
     const saved = this.state.saved;
+    const error = this.state.error;
+    const loading = this.state.loading;
+
+    if (error) {
+      return (
+        <div>
+          <Alert message="Oh no!" description={error.message} type="error" />
+        </div>
+      );
+    }
+
     if (results && saved) {
       return (
         <div className="app_container">
-          <div className="main_container">
-            <div className="result_container">
+          <div className="main-container">
+            <div className="result-container">
               <Card
                 loading={this.state.loading}
                 title="Results"
@@ -78,11 +101,12 @@ export default class App extends React.Component {
                 {results.map((property, index) => {
                   return (
                     <div>
-                      <Resultscard
+                      <AdCard
                         key={index}
-                        result={property}
-                        className="results"
-                        handlePropertyAdd={this.handlePropertyAdd}
+                        propertyData={property}
+                        cardClass="results"
+                        actionButtonText="Add"
+                        handleOnClick={this.handlePropertyAdd}
                       />
                       <br />
                     </div>
@@ -90,7 +114,7 @@ export default class App extends React.Component {
                 })}
               </Card>
             </div>
-            <div className="saved_container">
+            <div className="saved-container">
               <Card
                 loading={this.state.loading}
                 title="Saved Properties"
@@ -99,13 +123,21 @@ export default class App extends React.Component {
                 {saved.map((property, index) => {
                   return (
                     <div>
+                      <AdCard
+                        key={index}
+                        propertyData={property}
+                        cardClass="saved"
+                        actionButtonText="Remove"
+                        handleOnClick={this.handlePropertyRemove}
+                      />
+                      {/* 
                       <Savedcard
                         title="saved"
                         key={index}
                         saved={property}
                         className="saved"
                         handlePropertyRemove={this.handlePropertyRemove}
-                      />
+                      /> */}
                       <br />
                     </div>
                   );
@@ -115,8 +147,9 @@ export default class App extends React.Component {
           </div>
         </div>
       );
-    } else {
-      return <div>loading...</div>;
+    }
+    if (loading) {
+      return <div>loading</div>;
     }
   }
 }
