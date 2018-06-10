@@ -4,10 +4,6 @@ import { Button } from 'antd';
 import './Resultscard.scss';
 
 export default class Resultscard extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const result = this.props.result;
     const logoStyle = {
@@ -31,13 +27,13 @@ export default class Resultscard extends React.Component {
           </div>
           <div className="btn_container">
             <div className="btn_box">
-              <button
+              <Button
                 className="addBtn"
                 type="edit"
                 onClick={() => this.props.handlePropertyAdd(result)}
               >
                 Add
-              </button>
+              </Button>
             </div>
           </div>
         </Card>

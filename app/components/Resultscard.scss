@@ -25,3 +25,8 @@
 .result_container {
   width: 40%;
 }
+@media screen and (min-width: 0em) and (max-width: 33.9em) {
+  .result_container {
+    width: 100%;
+  }
+}

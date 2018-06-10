@@ -6,13 +6,13 @@ import {
 
 test('checkIfPropertyIsSaved should return true if property is saved before.', () => {
   const startState = {
-    saved: [{ id: 2 }],
+    saved: [{ id: '1' }],
   };
-  const property = { id: 2 };
-  checkIfPropertyIsSaved(property, startState.saved);
-  expect(startState.saved).toEqual(
-    expect.arrayContaining([expect.objectContaining(property)])
-  );
+  const property = {
+    id: '1',
+  };
+  const result = checkIfPropertyIsSaved(property, startState.saved);
+  expect(result).toBeTruthy();
 });
 
 test('savePropertyToSaved should return a new array which contains the property just added in.', () => {

@@ -30,13 +30,13 @@ export default class Resultscard extends React.Component {
           </div>
           <div className="btn_container">
             <div className="btn_box">
-              <button
+              <Button
                 className="deleteBtn"
                 type="edit"
                 onClick={() => this.props.handlePropertyRemove(saved)}
               >
                 Delete
-              </button>
+              </Button>
             </div>
           </div>
         </Card>
