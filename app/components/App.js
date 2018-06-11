@@ -100,9 +100,8 @@ export default class App extends React.Component {
               >
                 {results.map((property, index) => {
                   return (
-                    <div>
+                    <div key={index}>
                       <AdCard
-                        key={index}
                         propertyData={property}
                         cardClass="results"
                         actionButtonText="Add"
@@ -122,22 +121,14 @@ export default class App extends React.Component {
               >
                 {saved.map((property, index) => {
                   return (
-                    <div>
+                    <div key={index}>
                       <AdCard
-                        key={index}
                         propertyData={property}
                         cardClass="saved"
                         actionButtonText="Remove"
                         handleOnClick={this.handlePropertyRemove}
                       />
-                      {/* 
-                      <Savedcard
-                        title="saved"
-                        key={index}
-                        saved={property}
-                        className="saved"
-                        handlePropertyRemove={this.handlePropertyRemove}
-                      /> */}
+
                       <br />
                     </div>
                   );
