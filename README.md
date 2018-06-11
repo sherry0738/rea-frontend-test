@@ -65,3 +65,6 @@ npm run build
 ```bash
 npm test
 ```
+
+## wants to work as a team?
+make sure you have prettier and eslint so that our code will look a like.
